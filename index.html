@@ -1,1 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manucure | Toronto Nail Artistry</title>
+    
+    <!-- Fonts: Playfair Display (Luxury) & Montserrat (Modern) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#0a0a0a',
+                            dark: '#121212',
+                            pink: '#d946ef', // Fuchsia 500
+                            softPink: '#fce7f3',
+                            gold: '#C5A059'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d946ef;
+        }
+
+        /* Masonry Grid Logic */
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+        @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+        
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Image Hover Effect */
+        .img-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        }
+    </style>
+</head>
+<body class="bg-brand-black text-gray-200 font-sans antialiased selection:bg-brand-pink selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-brand-black/90 backdrop-blur-md border-b border-white/10 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-serif text-2xl tracking-widest text-white uppercase hover:text-brand-pink transition-colors">
+                Manucure<span class="text-brand-pink">.</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-8 text-sm tracking-wide uppercase">
+                <a href="#gallery" class="hover:text-brand-pink transition-colors">The Lookbook</a>
+                <a href="#info" class="hover:text-brand-pink transition-colors">Info</a>
+                <a href="#contact" class="px-5 py-2 border border-brand-pink text-brand-pink hover:bg-brand-pink hover:text-white transition-all duration-300">Get Quote</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark border-t border-white/10 p-6 space-y-4 text-center">
+            <a href="#gallery" class="block py-2 hover:text-brand-pink">The Lookbook</a>
+            <a href="#info" class="block py-2 hover:text-brand-pink">Info</a>
+            <a href="#contact" class="block py-2 text-brand-pink font-semibold">Get Quote</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+        <!-- Abstract Background -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-neutral-800 via-brand-black to-brand-black opacity-80"></div>
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1632516643720-e7f5d7d6ecc9?q=80&w=2511&auto=format&fit=crop')] bg-cover bg-center opacity-20"></div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto animate-fade-in-up">
+            <p class="text-brand-pink uppercase tracking-[0.3em] text-sm mb-4">Toronto, Ontario</p>
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-6 leading-tight">
+                Artistry at Your <br/> <span class="italic text-brand-pink">Fingertips</span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light">
+                Professional solo nail artist specializing in bespoke, premium designs. 
+                Browse the gallery and secure your unique look.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#gallery" class="px-8 py-4 bg-white text-black hover:bg-brand-pink hover:text-white transition-all duration-300 font-medium tracking-wide">
+                    View Gallery
+                </a>
+                <a href="#contact" class="px-8 py-4 border border-white/30 hover:border-brand-pink hover:text-brand-pink transition-all duration-300 font-medium tracking-wide backdrop-blur-sm">
+                    Request Quote
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-brand-black relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-white/10 pb-6">
+                <div>
+                    <h2 class="font-serif text-4xl text-white mb-2">The Collection</h2>
+                    <p class="text-gray-400 text-sm">Tap any image to view details and request a quote.</p>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <span class="text-brand-pink text-sm uppercase tracking-widest">Latest Works</span>
+                </div>
+            </div>
+
+            <!-- Dynamic Gallery Grid -->
+            <!-- Images are injected via JS below to handle 1.jpg, 2.jpg... -->
+            <div id="gallery-grid" class="masonry-grid min-h-[500px]">
+                <!-- Loading State -->
+                <div class="text-center col-span-full py-20 text-gray-500 italic">
+                    Loading refined aesthetics...
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <button id="load-more-btn" class="hidden px-8 py-3 border border-white/20 text-sm uppercase tracking-widest hover:bg-white hover:text-black transition-all">
+                    Load More Designs
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info & Policies -->
+    <section id="info" class="py-20 bg-brand-dark">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <i data-lucide="gem" class="w-10 h-10 text-brand-pink mx-auto mb-6"></i>
+            <h2 class="font-serif text-3xl md:text-4xl text-white mb-8">Service Information</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 text-left">
+                <div class="bg-brand-black p-8 border border-white/5 hover:border-brand-pink/30 transition-colors">
+                    <h3 class="text-xl font-serif text-white mb-4">Location & Visits</h3>
+                    <p class="text-gray-400 leading-relaxed mb-4">
+                        Based in <span class="text-white">Toronto, Ontario</span>.
+                    </p>
+                    <p class="text-gray-400 text-sm leading-relaxed border-l-2 border-brand-pink pl-4">
+                        <span class="text-brand-pink font-semibold">Mobile Service:</span> Home visits are strictly subject to availability and location. An additional travel fee may apply based on distance.
+                    </p>
+                </div>
+                
+                <div class="bg-brand-black p-8 border border-white/5 hover:border-brand-pink/30 transition-colors">
+                    <h3 class="text-xl font-serif text-white mb-4">Booking Process</h3>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li class="flex items-start">
+                            <i data-lucide="check" class="w-4 h-4 text-brand-pink mr-3 mt-1"></i>
+                            <span>Browse the gallery to find your inspiration.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check" class="w-4 h-4 text-brand-pink mr-3 mt-1"></i>
+                            <span>Send a message with the design reference ID (e.g., #05) or your own photo.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check" class="w-4 h-4 text-brand-pink mr-3 mt-1"></i>
+                            <span>Receive a custom quotation and available time slots.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check" class="w-4 h-4 text-brand-pink mr-3 mt-1"></i>
+                            <span>A deposit is required to secure your appointment.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / CTA -->
+    <section id="contact" class="py-24 relative overflow-hidden">
+        <!-- Background decorative elements -->
+        <div class="absolute -right-20 top-20 w-96 h-96 bg-brand-pink/10 rounded-full blur-3xl"></div>
+
+        <div class="max-w-3xl mx-auto px-6 relative z-10 text-center">
+            <h2 class="font-serif text-4xl md:text-5xl text-white mb-6">Ready for your Manucure?</h2>
+            <p class="text-gray-400 mb-10 text-lg">
+                Send a message with your design reference for a quotation. <br>
+                Let's create something beautiful.
+            </p>
+
+            <div class="bg-brand-dark p-8 md:p-10 rounded-sm border border-white/10 shadow-2xl">
+                <form id="quote-form" onsubmit="handleFormSubmit(event)" class="space-y-6 text-left">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-gray-500 mb-2">Reference Design (Optional)</label>
+                        <input type="text" id="design-ref" placeholder="e.g. Design #4 from Gallery" class="w-full bg-brand-black border border-white/10 p-4 text-white focus:border-brand-pink focus:outline-none transition-colors">
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-gray-500 mb-2">Your Name</label>
+                            <input type="text" id="client-name" required class="w-full bg-brand-black border border-white/10 p-4 text-white focus:border-brand-pink focus:outline-none transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-gray-500 mb-2">Preferred Date</label>
+                            <input type="text" placeholder="Approximate date" class="w-full bg-brand-black border border-white/10 p-4 text-white focus:border-brand-pink focus:outline-none transition-colors">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-gray-500 mb-2">Message / Details</label>
+                        <textarea id="client-msg" rows="4" placeholder="Any specific requests? Need a home visit?" class="w-full bg-brand-black border border-white/10 p-4 text-white focus:border-brand-pink focus:outline-none transition-colors"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-brand-pink text-white font-medium tracking-widest py-4 hover:bg-pink-600 transition-all uppercase text-sm shadow-[0_0_20px_rgba(217,70,239,0.3)]">
+                        Send Request via Email
+                    </button>
+                    
+                    <!-- Alternative Social Buttons -->
+                    <div class="pt-6 border-t border-white/5 flex flex-col md:flex-row gap-4 justify-center items-center">
+                        <span class="text-xs text-gray-500 uppercase">Or contact directly:</span>
+                        <a href="https://instagram.com" target="_blank" class="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                            <span>DM on Instagram</span>
+                        </a>
+                        <a href="mailto:hello@manucure.ca" class="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                            <span>hello@manucure.ca</span>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-6 md:mb-0 text-center md:text-left">
+                <h3 class="font-serif text-2xl text-white">Manucure.</h3>
+                <p class="text-gray-600 text-sm mt-2">© 2024 Manucure. All rights reserved.</p>
+            </div>
+            
+            <div class="text-right">
+                <p class="text-gray-500 text-sm">Toronto, Ontario</p>
+                <p class="text-brand-pink text-xs mt-1">Premium Nail Designs</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 hidden flex justify-center items-center opacity-0 transition-opacity duration-300">
+        <button id="lightbox-close" class="absolute top-6 right-6 text-white hover:text-brand-pink p-2">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        
+        <div class="relative max-w-5xl max-h-screen w-full flex flex-col items-center p-4">
+            <img id="lightbox-img" src="" alt="Nail Design Detail" class="max-h-[80vh] w-auto object-contain shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/10">
+            
+            <div class="mt-6 flex flex-col items-center gap-3">
+                <h3 id="lightbox-title" class="text-white font-serif text-xl">Design #01</h3>
+                <button onclick="inquireAboutDesign()" class="px-6 py-2 bg-brand-pink text-white text-sm uppercase tracking-wider hover:bg-pink-600 transition-colors flex items-center gap-2">
+                    <i data-lucide="message-square" class="w-4 h-4"></i>
+                    Get Quote for this Look
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // --- CONFIGURATION ---
+        // Change this number to match roughly how many photos you have (or more)
+        const TOTAL_IMAGES_TO_CHECK = 60; 
+        const INITIAL_LOAD = 15;
+        let imagesLoaded = 0;
+        
+        const galleryGrid = document.getElementById('gallery-grid');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        let currentDesignId = '';
+
+        // --- GALLERY GENERATOR ---
+        // This logic tries to load images named 1.jpg, 2.jpg, etc.
+        // If the image doesn't exist, it displays a stylized placeholder
+        // so the site looks good even without all files present.
+
+        function createGalleryItem(index) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'masonry-item relative group cursor-pointer overflow-hidden';
+            wrapper.onclick = () => openLightbox(index);
+
+            const img = document.createElement('img');
+            // We use a placeholder as the initial src to prevent ugly broken icons
+            // Then we try to swap it for the real file
+            const fileName = `${index}.jpg`; // Assumes images are in root folder
+            
+            img.alt = `Nail Design ${index}`;
+            img.className = 'w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out';
+            
+            // Try to load local image
+            img.src = fileName;
+            
+            // Fallback if user hasn't added the image yet
+            img.onerror = function() {
+                // If 1.jpg doesn't exist, replace with a nice placeholder for demo purposes
+                // In production, you might want to hide the wrapper: wrapper.style.display = 'none';
+                this.src = `https://placehold.co/600x${index % 2 === 0 ? '800' : '600'}/121212/333333?text=Design+${index}`;
+                this.onerror = null; // Prevent infinite loop
+            };
+
+            // Overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center';
+            overlay.innerHTML = `<span class="text-white font-serif italic text-lg border-b border-brand-pink pb-1">View Design #${index}</span>`;
+
+            wrapper.appendChild(img);
+            wrapper.appendChild(overlay);
+            return wrapper;
+        }
+
+        function loadImages(count) {
+            // Remove loading text if first load
+            if(galleryGrid.innerText.includes('Loading')) galleryGrid.innerHTML = '';
+
+            const end = Math.min(imagesLoaded + count, TOTAL_IMAGES_TO_CHECK);
+            
+            for (let i = imagesLoaded + 1; i <= end; i++) {
+                const item = createGalleryItem(i);
+                galleryGrid.appendChild(item);
+            }
+            
+            imagesLoaded = end;
+
+            // Show Load More button if there are more images potentially
+            const btn = document.getElementById('load-more-btn');
+            if (imagesLoaded < TOTAL_IMAGES_TO_CHECK) {
+                btn.classList.remove('hidden');
+            } else {
+                btn.classList.add('hidden');
+            }
+        }
+
+        // Initialize Gallery
+        window.addEventListener('DOMContentLoaded', () => {
+            loadImages(INITIAL_LOAD);
+        });
+
+        document.getElementById('load-more-btn').addEventListener('click', () => {
+            loadImages(10);
+        });
+
+        // --- LIGHTBOX FUNCTIONS ---
+        function openLightbox(index) {
+            currentDesignId = `Design #${index}`;
+            const imgElement = document.querySelectorAll('.masonry-item img')[index - 1]; // Get source image
+            
+            lightboxImg.src = imgElement.src;
+            lightboxTitle.textContent = currentDesignId;
+            
+            lightbox.classList.remove('hidden');
+            // Small delay to allow display:flex to apply before opacity transition
+            setTimeout(() => {
+                lightbox.classList.remove('opacity-0');
+            }, 10);
+            document.body.style.overflow = 'hidden'; // Stop scrolling
+        }
+
+        function closeLightbox() {
+            lightbox.classList.add('opacity-0');
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+        
+        // Close on background click
+        lightbox.addEventListener('click', (e) => {
+            if(e.target === lightbox) closeLightbox();
+        });
+
+        // --- CONTACT LOGIC ---
+        function inquireAboutDesign() {
+            closeLightbox();
+            document.getElementById('design-ref').value = currentDesignId;
+            document.getElementById('contact').scrollIntoView();
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('client-name').value;
+            const design = document.getElementById('design-ref').value;
+            const msg = document.getElementById('client-msg').value;
+
+            // Construct Mailto Link
+            const subject = `Quote Request from ${name} - ${design || 'General Inquiry'}`;
+            const body = `Hi Manucure,\n\nI am interested in getting a quote.\n\nName: ${name}\nDesign Reference: ${design}\n\nDetails: ${msg}\n\nPlease let me know your availability.`;
+            
+            window.location.href = `mailto:hello@manucure.ca?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Optional: Show success feedback
+            alert('Opening your email client to send the request...');
+        }
+    </script>
+</body>
+</html>
