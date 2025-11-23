@@ -295,7 +295,8 @@
         lucide.createIcons();
 
         // --- CONFIGURATION ---
-        // Change this number to match roughly how many photos you have (or more)
+        // We check up to 60, but if the image doesn't exist, we just hide the spot.
+        // This allows you to add images 8, 9, 10 later without editing code.
         const TOTAL_IMAGES_TO_CHECK = 60; 
         const INITIAL_LOAD = 15;
         let imagesLoaded = 0;
@@ -307,19 +308,15 @@
         let currentDesignId = '';
 
         // --- GALLERY GENERATOR ---
-        // This logic tries to load images named 1.jpg, 2.jpg, etc.
-        // If the image doesn't exist, it displays a stylized placeholder
-        // so the site looks good even without all files present.
-
         function createGalleryItem(index) {
             const wrapper = document.createElement('div');
             wrapper.className = 'masonry-item relative group cursor-pointer overflow-hidden';
             wrapper.onclick = () => openLightbox(index);
 
             const img = document.createElement('img');
-            // We use a placeholder as the initial src to prevent ugly broken icons
-            // Then we try to swap it for the real file
-            const fileName = `${index}.jpg`; // Assumes images are in root folder
+            
+            // UPDATED: Now looks inside 'images/' folder and expects '.jpeg'
+            const fileName = `images/${index}.jpeg`; 
             
             img.alt = `Nail Design ${index}`;
             img.className = 'w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out';
@@ -327,12 +324,11 @@
             // Try to load local image
             img.src = fileName;
             
-            // Fallback if user hasn't added the image yet
+            // Fallback: If image 8.jpeg doesn't exist yet, HIDE this block entirely.
+            // This keeps the site looking professional (no broken image icons).
             img.onerror = function() {
-                // If 1.jpg doesn't exist, replace with a nice placeholder for demo purposes
-                // In production, you might want to hide the wrapper: wrapper.style.display = 'none';
-                this.src = `https://placehold.co/600x${index % 2 === 0 ? '800' : '600'}/121212/333333?text=Design+${index}`;
-                this.onerror = null; // Prevent infinite loop
+                wrapper.style.display = 'none';
+                this.onerror = null; 
             };
 
             // Overlay
@@ -360,6 +356,9 @@
 
             // Show Load More button if there are more images potentially
             const btn = document.getElementById('load-more-btn');
+            // Logic updated: Since we hide missing images, we can always show the button 
+            // until we hit the hard limit, or we could hide it if we suspect we are done.
+            // For now, we leave it simple.
             if (imagesLoaded < TOTAL_IMAGES_TO_CHECK) {
                 btn.classList.remove('hidden');
             } else {
